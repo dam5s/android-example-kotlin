@@ -1,0 +1,25 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        minSdkVersion 18
+        targetSdkVersion 18
+        versionCode 2
+        versionName "1.0.0-SNAPSHOT"
+        applicationId "com.example"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+    }
+}
+
+dependencies {
+    // Espresso
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.0')
+    androidTestCompile('com.android.support.test:testing-support-lib:0.1')
+}

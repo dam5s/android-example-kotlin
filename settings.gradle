@@ -1,0 +1,4 @@
+rootProject.name = "android-example"
+
+include "application"
+include "robolectric-tests"
