@@ -7,18 +7,17 @@ import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
+import com.example.login.LoginActivity
 
 LargeTest
-public class DeckardEspressoTest : ActivityInstrumentationTestCase2<DeckardActivity>(javaClass<DeckardActivity>()) {
+public class ExampleEspressoTest : ActivityInstrumentationTestCase2<LoginActivity>(javaClass<LoginActivity>()) {
 
-    throws(javaClass<Exception>())
     override fun setUp() {
         super.setUp()
         getActivity()
     }
 
-    throws(javaClass<InterruptedException>())
     public fun testActivityShouldHaveText() {
-        onView(withId(R.id.text)).check(matches(withText("Hello Espresso!")))
+        onView(withId(R.id.loginTextView)).check(matches(withText("Login")))
     }
 }

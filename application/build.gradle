@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 22
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        minSdkVersion 18
-        targetSdkVersion 18
+        minSdkVersion 16
+        targetSdkVersion 22
         versionCode 2
         versionName "1.0.0-SNAPSHOT"
         applicationId "com.example"
@@ -26,6 +26,8 @@ android {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    compile "com.android.support:support-v4:22.1.0"
 
     // Espresso
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.0')
