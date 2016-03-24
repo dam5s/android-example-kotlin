@@ -4,13 +4,10 @@ import android.app.Activity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
-import butterknife.bindView
 import com.example.R
 import com.example.ServiceLocator
 import com.example.api.ApiGateway
-import com.example.api.ApiMethod
-import com.example.api.ApiRequest
+import com.example.extensions.butterknife.bindView
 
 public class LoginActivity : Activity() {
     var apiGateway: ApiGateway = ServiceLocator.apiGateway
