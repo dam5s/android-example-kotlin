@@ -2,23 +2,22 @@ package com.example.login
 
 import android.app.Activity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
+import com.example.ExampleApplication
 import com.example.R
-import com.example.ServiceLocator
 import com.example.api.ApiGateway
-import com.example.extensions.butterknife.bindView
+import kotlinx.android.synthetic.main.login.*
+import javax.inject.Inject
 
-public class LoginActivity : Activity() {
-    var apiGateway: ApiGateway = ServiceLocator.apiGateway
+class LoginActivity : Activity() {
 
-    val loginEditText: EditText by bindView(R.id.loginEditText)
-    val passwordEditText: EditText by bindView(R.id.passwordEditText)
-    val loginButton: Button by bindView(R.id.loginButton)
+    @Inject
+    lateinit var apiGateway: ApiGateway
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
+        ExampleApplication.graph.inject(this)
+
         setTitle(R.string.pleaseSignIn)
 
         loginButton.setOnClickListener {

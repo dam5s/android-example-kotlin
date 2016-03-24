@@ -1,22 +1,6 @@
-buildscript {
-    ext.kotlin_version = '1.0.1-1'
-
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        maven {
-            url "https://repo1.maven.org/maven2"
-        }
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 repositories {
     mavenCentral()
@@ -33,7 +17,10 @@ android {
         versionName "1.0.0-SNAPSHOT"
         applicationId "com.example"
     }
+}
 
+kapt {
+    generateStubs = true
 }
 
 dependencies {
@@ -42,14 +29,36 @@ dependencies {
     compile 'com.android.support:support-v4:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
 
+    compile 'com.google.dagger:dagger:2.0'
+    kapt 'com.google.dagger:dagger-compiler:2.0'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+
 
     testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
-
     testCompile "junit:junit:4.12"
     testCompile "org.hamcrest:hamcrest-core:1.1"
     testCompile "org.hamcrest:hamcrest-library:1.1"
     testCompile "org.hamcrest:hamcrest-integration:1.1"
-
     testCompile "org.robolectric:robolectric:3.0"
+}
 
+buildscript {
+    ext.kotlin_version = '1.0.1-1'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "https://repo1.maven.org/maven2"
+        }
+        maven {
+            url 'http://oss.sonatype.org/content/repositories/snapshots'
+        }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.5.0'
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
 }

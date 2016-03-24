@@ -8,6 +8,7 @@ import com.example.api.ApiResponse
 import com.example.login.LoginActivity
 import com.example.Promise
 import com.example.login.LoginApiResponse
+import kotlinx.android.synthetic.main.login.*
 import org.hamcrest.Matchers.equalTo
 import org.junit.Assert.assertThat
 import org.junit.Test
