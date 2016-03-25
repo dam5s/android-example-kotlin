@@ -2,6 +2,7 @@ package com.example.login
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import com.example.ExampleApplication
 import com.example.R
 import com.example.api.ApiGateway
@@ -16,12 +17,14 @@ class LoginActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
-        ExampleApplication.graph.inject(this)
+        ExampleApplication.container.inject(this)
 
         setTitle(R.string.pleaseSignIn)
 
         loginButton.setOnClickListener {
             val request = LoginApiRequest(login = "FIX ME", password = "FIX ME")
+            Log.d("LoginActivity", "Login attempt with ${request.login} ${request.password}")
+
             apiGateway.doRequest(request)
         }
     }

@@ -18,7 +18,7 @@ import org.robolectric.annotation.Config
 import kotlin.test.assertNotNull
 
 @RunWith(RobolectricGradleTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = intArrayOf(21), application = TestExampleApplication::class)
+@Config(constants = BuildConfig::class)
 class LoginActivityTest {
 
     private val fakeApiGateway = FakeApiGateway()

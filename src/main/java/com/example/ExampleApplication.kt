@@ -12,24 +12,20 @@ import javax.inject.Singleton
 open class ExampleApplication : Application() {
 
     companion object {
-        @JvmStatic lateinit var graph: ApplicationComponent
+        @JvmStatic lateinit var container: ApplicationComponent
     }
-
-    internal open var applicationModule: ApplicationModule = ApplicationModule(this)
 
     override fun onCreate() {
         super.onCreate()
 
-        onInit()
+        initializeContainer(ApplicationModule(this))
     }
 
-    open fun onInit() {
-        graph = DaggerApplicationComponent
+    open fun initializeContainer(m : ApplicationModule) {
+        container = DaggerApplicationComponent
                 .builder()
-                .applicationModule(applicationModule)
+                .applicationModule(m)
                 .build()
-
-        graph.inject(this)
     }
 
 }
@@ -38,7 +34,6 @@ open class ExampleApplication : Application() {
 @Component(modules = arrayOf(ApplicationModule::class))
 interface ApplicationComponent {
 
-    fun inject(application: ExampleApplication)
     fun inject(loginActivity: LoginActivity)
 }
 
