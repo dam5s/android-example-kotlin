@@ -21,7 +21,7 @@ class LoginActivity : Activity() {
         setTitle(R.string.pleaseSignIn)
 
         loginButton.setOnClickListener {
-            val request = LoginApiRequest(login = "", password = "")
+            val request = LoginApiRequest(login = "FIX ME", password = "FIX ME")
             apiGateway.doRequest(request)
         }
     }
