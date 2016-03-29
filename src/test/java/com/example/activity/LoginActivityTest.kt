@@ -1,44 +1,31 @@
 package com.example.activity
 
-import android.app.Activity
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import com.example.R
-import com.example.api
+import com.example.*
 import com.example.api.ApiGateway
 import com.example.api.ApiMethod
 import com.example.api.ApiRequest
 import com.example.api.ApiResponse
 import com.example.login.LoginActivity
-import com.example.tasks.Promise
-import login.LoginApiResponse
+import com.example.login.LoginApiRequest
+import com.example.login.LoginApiResponse
+import kotlinx.android.synthetic.main.login.*
+import org.hamcrest.Matchers.equalTo
+import org.junit.Assert.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.Robolectric
-import org.robolectric.RobolectricTestRunner
+import org.robolectric.RobolectricGradleTestRunner
 import org.robolectric.annotation.Config
-
-import org.junit.Assert.assertThat
-import org.hamcrest.Matchers.*
-
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledExecutorService
-import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
 
-RunWith(javaClass<RobolectricTestRunner>())
-Config(manifest = "../application/src/main/AndroidManifest.xml", emulateSdk = 18)
-public class LoginActivityTest {
+@RunWith(RobolectricGradleTestRunner::class)
+@Config(constants = BuildConfig::class)
+class LoginActivityTest {
 
-    Test
-    public fun testLogin() {
-        val activity = Robolectric.setupActivity(javaClass<LoginActivity>())
-        val fakeApiGateway = FakeApiGateway()
+    private val fakeApiGateway = FakeApiGateway()
+    private val activity = testContainer(apiGateway = fakeApiGateway).buildActivity(LoginActivity::class.java)
 
-        activity.apiGateway = fakeApiGateway
+    @Test
+    fun testLogin() {
         fakeApiGateway.stubbedPromise = Promise<LoginApiResponse>()
 
         activity.loginEditText.setText("hello@example.com")
@@ -47,10 +34,13 @@ public class LoginActivityTest {
 
         assertThat(fakeApiGateway.performedRequest?.method, equalTo(ApiMethod.POST))
         assertNotNull(fakeApiGateway.performedRequest?.body)
+
+        val expectedLoginApiRequest = LoginApiRequest("hello@example.com", "secret1")
+        assertThat(fakeApiGateway.performedRequest!! as LoginApiRequest, equalTo(expectedLoginApiRequest))
     }
 }
 
-class FakeApiGateway: ApiGateway {
+class FakeApiGateway : ApiGateway {
     var performedRequest: ApiRequest<*>? = null
     var stubbedPromise: Promise<*>? = null
 

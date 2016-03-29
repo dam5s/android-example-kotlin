@@ -1,12 +1,12 @@
 package com.example.api
 
-import com.example.tasks.Promise
+import com.example.Promise
 
-trait ApiGateway {
+interface ApiGateway {
     fun <T: ApiResponse> doRequest(request: ApiRequest<T>): Promise<T>
 }
 
-trait ApiRequest<T: ApiResponse> {
+interface ApiRequest<T: ApiResponse> {
     val method: ApiMethod
     val body: Any?
 
@@ -17,12 +17,12 @@ trait ApiRequest<T: ApiResponse> {
     fun buildResponse(): T
 }
 
-trait ApiResponse {
+interface ApiResponse {
 }
 
 enum class ApiMethod {
-    GET
-    POST
-    PUT
+    GET,
+    POST,
+    PUT,
     DELETE
 }

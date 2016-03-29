@@ -1,6 +1,6 @@
 package com.example.api
 
-import com.example.tasks.Promise
+import com.example.Promise
 
 class HttpApiGateway: ApiGateway {
     override fun <T : ApiResponse> doRequest(request: ApiRequest<T>): Promise<T> {

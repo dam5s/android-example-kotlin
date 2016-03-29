@@ -3,9 +3,9 @@
           package="com.example">
 
     <application
-        android:name=".ExampleApplication"
+        android:name="com.example.ExampleApplication"
         android:allowBackup="true">
-        <activity android:name="com.example.login.LoginActivity" android:screenOrientation="portrait">
+        <activity android:name=".login.LoginActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
